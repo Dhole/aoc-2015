@@ -1,6 +1,7 @@
 program day01;
 
 var
+    // String can only have up to 255 characters, so we need to use AnsiString instead
     input: AnsiString;
     c: Char;
     r: Integer = 0;
