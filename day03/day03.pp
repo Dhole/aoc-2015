@@ -1,4 +1,4 @@
-program day01;
+program day03;
 
 uses Quicksort;
 
