@@ -24,25 +24,25 @@ function score(list: array of Longint;
 var
     i, s, src, dst, n: Longint;
 begin
-    n := Length(list)-1;
+    n := Length(list);
     score := 0;
-    for i := 0 to n do begin
+    for i := 0 to n-1 do begin
         src := list[i];
         if i = 0 then
-            dst := list[n]
+            dst := list[n-1]
         else
             dst := list[i-1];
         s := rel[src*Length(list) + dst];
-        Write(s, ' ');
+        // Write(s, ' (', i, ') ');
         score += s;
 
         src := list[i];
         dst := list[(i+1) mod n];
         s := rel[src*Length(list) + dst];
-        Write(s, ' | ');
+        // Write(s, ' | ');
         score += s;
     end;
-    WriteLn();
+    // WriteLn();
 end;
 
 procedure swap(var xs: array of Longint; i, j: Longint);
@@ -82,7 +82,7 @@ var
     entries: array of array[0..2] of Longint;
     len: Longint = 0;
     names: array of string;
-    v, i, max: Longint;
+    v, i, j, max: Longint;
     rel: array of Longint;
     list: array of Longint;
 begin
@@ -98,13 +98,26 @@ begin
         v := StrToInt(parts[3]);
         if parts[2] = 'lose' then
             v := -1 * v;
-        WriteLn(src, ' ', dst, ' ', v);
+        // WriteLn(src, ' ', dst, ' ', v);
         entries[i][0] := src;
         entries[i][1] := dst;
         entries[i][2] := v;
         i += 1;
     end;
-    WriteLn();
+    // WriteLn();
+
+    // Part 2
+    len += 1;
+    for j := 0 to len-1 do begin
+        entries[i][0] := len-1;
+        entries[i][1] := j;
+        entries[i][2] := 0;
+        i += 1;
+        entries[i][0] := j;
+        entries[i][1] := len-1;
+        entries[i][2] := 0;
+        i += 1;
+    end;
 
     SetLength(names, len);
     SetLength(entries, i);
@@ -117,12 +130,11 @@ begin
         rel[src*len + dst] := v;
     end;
 
-    SetLength(list, Length(names));
+    SetLength(list, len);
     for i := 0 to Length(list)-1 do
         list[i] := i;
 
     max := 0;
     permute(rel, max, list, 0);
-    WriteLn(list[0], ' ', list[1], ' ', list[2], ' ', list[3]);
     WriteLn(max);
 end.
