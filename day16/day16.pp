@@ -97,7 +97,7 @@ begin
             tmp := Copy(tmp, 1, Length(tmp)-1);
             elemId := nameId(names, tmp);
             if elemId = -1 then
-                WriteLn('elem ', tmp, 'not valid');
+                WriteLn('elem ', tmp, ' not valid');
             tmp := parts[2 + 2*j + 1];
             if j <> 2 then
                 tmp := Copy(tmp, 1, Length(tmp)-1);
