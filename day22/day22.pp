@@ -97,6 +97,9 @@ begin
         // WriteLn('-- Player turn --');
         // printStats(player, boss);
         // WriteLn();
+        player.hp -= 1;
+        if player.hp <= 0 then
+            continue;
         applySpells(player, boss, spellStatus, spells, false);
         if checkEnd(player, boss, minWin, costInit) then
             continue;
